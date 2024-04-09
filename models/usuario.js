@@ -2,39 +2,60 @@ const { Schema, model } = require('mongoose');
 
 const UsuarioSchema = Schema({
 
-    nombre: {
+    username: {
         type: String,
-        required: [true,'El nombre es obligatorio']
-    },
-    correo: {
-        type: String,
-        required: [true,'El correo es obligatorio'],
+        required: [true,'El username es obligatorio'],
         unique: true
     },
     password: {
         type: String,
-        required: [true,'El contraseña es obligatorio']
+        required: [true,'El password es obligatorio']
     },
-    password: {
-        type: String,
-        required: [true,'El contraseña es obligatorio']
-    },
-    img: {
-        type: String
-    },
-    rol: {
+    tipo: {
         type: String,
         required: true,
-        default: 'USER_ROLE',
-        emun: ['ADMIN_ROLE', 'USER_ROLE']
+        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO']
+    },
+    cuenta_activa: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    ultimo_cambio_pass: {
+        type: Date,
+        default: null
+    },
+    ultimo_login: {
+        type: Date,
+        default: null
+    },
+    nombres: {
+        type: String,
+        required: [true,'El nombre es obligatorio']
+    },
+    apellidos: {
+        type: String,
+        required: [true,'El apellidos es obligatorio']
+    },
+    carnet: {
+        type: String,
+        required: [true,'El carnet es obligatorio']
+    },
+    area: {
+        type: String,
+        required: [true,'El area es obligatorio']
+    },
+    cargo: {
+        type: String,
+        required: [true,'El cargo es obligatorio']
+    },
+    fecha_creacion: {
+        type: Date,
+        default: Date.now
     },
     estado: {
         type: Boolean,
         default: true
-    },
-    google: {
-        type: Boolean,
-        default: false
     },
 });
 
