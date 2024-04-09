@@ -16,6 +16,11 @@ const UsuarioSchema = Schema({
         required: true,
         emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO']
     },
+    permiso: {
+        type: Schema.Types.ObjectId,
+        ref: 'Permiso',
+        required: true
+    },
     cuenta_activa: {
         type: Boolean,
         required: true,
