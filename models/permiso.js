@@ -3,43 +3,52 @@ const { Schema, model } = require('mongoose');
 const PermisoSchema = Schema({
     titulo: {
         type: String,
-        required: [true, 'El titulo es obligatorio'],
-        unique: true
+        required: [true, 'El titulo es obligatorio']
     },
     tipo: {
         type: String,
-        required: true,
-        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO']
+        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO'],
+        required: [true,'Seleccionar un tipo de usuario es obligatorio']
     },
     crear: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
     leer: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
     modificar: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
     borrar: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
-    acceso: {
-    type: String,
-    default: ["all"],
-    required: true,
-    validate: {
-        validator: function(v) {
-            return v.includes('all') || v.length > 0;
-        },
-        message: 'Se debe especificar al menos una página o "all"',
-    }},
+    tipo_acceso: {
+        type: String,
+        enum: ['all', 'specific'],
+        default: 'all',
+        required: true
+    },
+    paginas: {
+        type: [String],
+        validate: {
+            validator: function(v) {
+                return this.tipoAcceso === 'specific' ? v.length > 0 : true;
+            },
+            message: 'Debe especificar al menos una página si el acceso no es "all"'
+        }
+    },
     fecha_creacion: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     },
     estado: {
         type: Boolean,

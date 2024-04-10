@@ -13,8 +13,8 @@ const UsuarioSchema = Schema({
     },
     tipo: {
         type: String,
-        required: true,
-        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO']
+        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO'],
+        required: [true,'Seleccionar un tipo de usuario es obligatorio']
     },
     permiso: {
         type: Schema.Types.ObjectId,
@@ -23,8 +23,8 @@ const UsuarioSchema = Schema({
     },
     cuenta_activa: {
         type: Boolean,
-        required: true,
-        default: true
+        default: true,
+        required: true
     },
     ultimo_cambio_pass: {
         type: Date,
@@ -56,11 +56,13 @@ const UsuarioSchema = Schema({
     },
     fecha_creacion: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     },
     estado: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
 });
 
