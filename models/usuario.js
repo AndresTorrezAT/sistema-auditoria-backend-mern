@@ -1,20 +1,19 @@
 const { Schema, model } = require('mongoose');
 
 const UsuarioSchema = Schema({
-
     username: {
         type: String,
-        required: [true,'El username es obligatorio'],
-        unique: true
+        unique: true,
+        required: [true, 'El username es obligatorio']
     },
     password: {
         type: String,
-        required: [true,'El password es obligatorio']
+        required: [true, 'El password es obligatorio']
     },
     tipo: {
         type: String,
-        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO'],
-        required: [true,'Seleccionar un tipo de usuario es obligatorio']
+        enum: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO'],
+        required: [true, 'Seleccionar un tipo de usuario es obligatorio']
     },
     permiso: {
         type: Schema.Types.ObjectId,
@@ -36,23 +35,23 @@ const UsuarioSchema = Schema({
     },
     nombres: {
         type: String,
-        required: [true,'El nombre es obligatorio']
+        required: [true, 'El nombre es obligatorio']
     },
     apellidos: {
         type: String,
-        required: [true,'El apellidos es obligatorio']
+        required: [true, 'El apellidos es obligatorio']
     },
     carnet: {
         type: String,
-        required: [true,'El carnet es obligatorio']
+        required: [true, 'El carnet es obligatorio']
     },
     area: {
         type: String,
-        required: [true,'El area es obligatorio']
+        required: [true, 'El área es obligatorio']
     },
     cargo: {
         type: String,
-        required: [true,'El cargo es obligatorio']
+        required: [true, 'El cargo es obligatorio']
     },
     fecha_creacion: {
         type: Date,
@@ -65,6 +64,7 @@ const UsuarioSchema = Schema({
         required: true
     },
 });
+
 
 UsuarioSchema.methods.toJSON = function() {
     const { __v, password, _id, ...usuario } = this.toObject();

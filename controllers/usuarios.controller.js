@@ -6,16 +6,10 @@ const Usuario = require('../models/usuario');
 
 
 
-const usuariosGet = async( req = request, res = response ) => { // res = responde solo es para autocompletar el tipado
+const usuariosGet = async( req = request, res = response ) => {
 
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
-
-    // const usuarios = await Usuario.find()
-    //     .skip( Number(desde) )
-    //     .limit( Number(limite) );
-
-    // const total = await Usuario.countDocuments();
 
     const [ total, usuarios ] = await Promise.all([
         Usuario.countDocuments( query ),
@@ -32,8 +26,8 @@ const usuariosGet = async( req = request, res = response ) => { // res = respond
 
 const usuariosPost = async(req, res = response ) => {
 
-    const { nombre, correo, password, rol } = req.body; // el body de la request
-    const usuario = new Usuario({ nombre, correo, password, rol });
+    const { username, password, permiso, nombres, apellidos, carnet, area, cargo } = req.body; // el body de la request
+    const usuario = new Usuario({ username, password, permiso, nombres, apellidos, carnet, area, cargo });
     
     //Encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
