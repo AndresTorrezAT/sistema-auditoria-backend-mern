@@ -7,8 +7,8 @@ const PermisoSchema = Schema({
     },
     tipo: {
         type: String,
-        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO'],
-        required: [true,'Seleccionar un tipo de usuario es obligatorio']
+        required: true,
+        emun: ['ADMINISTRADOR', 'AUDITOR', 'AUDITADO']
     },
     crear: {
         type: Boolean,
@@ -30,21 +30,16 @@ const PermisoSchema = Schema({
         default: true,
         required: true
     },
-    tipo_acceso: {
-        type: String,
-        enum: ['all', 'specific'],
-        default: 'all',
-        required: true
-    },
-    paginas: {
-        type: [String],
-        validate: {
-            validator: function(v) {
-                return this.tipoAcceso === 'specific' ? v.length > 0 : true;
-            },
-            message: 'Debe especificar al menos una página si el acceso no es "all"'
-        }
-    },
+    acceso: {
+    type: String,
+    default: ["all"],
+    required: true,
+    validate: {
+        validator: function(v) {
+            return v.includes('all') || v.length > 0;
+        },
+        message: 'Se debe especificar al menos una página o "all"',
+    }},
     fecha_creacion: {
         type: Date,
         default: Date.now,
@@ -58,9 +53,9 @@ const PermisoSchema = Schema({
 });
 
 
-CategoriaSchema.methods.toJSON = function() {
+PermisoSchema.methods.toJSON = function() {
     const { __v, estado, ...data } = this.toObject();
     return data;
 }
 
-module.exports = model( 'Categoria', CategoriaSchema );
+module.exports = model( 'Permiso', PermisoSchema );
