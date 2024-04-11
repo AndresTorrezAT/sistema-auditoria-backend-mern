@@ -7,14 +7,16 @@ const { dbConnection } = require('../database/config');
 class Server {
 
     constructor() {
+
         this.app = express();
         this.port = process.env.PORT;
 
         this.paths = {
             auth:       '/api/auth',
             buscar:     '/api/buscar',
+            categorias: '/api/categorias',
+            productos:  '/api/productos',
             usuarios:   '/api/usuarios',
-            permisos:   '/api/permisos',
             uploads:    '/api/uploads'
         }
 
@@ -56,8 +58,9 @@ class Server {
         
         this.app.use( this.paths.auth, require('../routes/auth.routes'));
         this.app.use( this.paths.buscar, require('../routes/buscar.routes'));
+        this.app.use( this.paths.categorias, require('../routes/categorias.routes'));
+        this.app.use( this.paths.productos, require('../routes/productos.routes'));
         this.app.use( this.paths.usuarios, require('../routes/usuarios.routes'));
-        this.app.use( this.paths.permisos, require('../routes/permisos.routes'));
         this.app.use( this.paths.uploads, require('../routes/uploads.routes'));
 
     }

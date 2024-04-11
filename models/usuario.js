@@ -18,7 +18,7 @@ const UsuarioSchema = Schema({
     permiso: {
         type: Schema.Types.ObjectId,
         ref: 'Permiso',
-        required: true
+        required: false
     },
     cuenta_activa: {
         type: Boolean,
@@ -44,6 +44,11 @@ const UsuarioSchema = Schema({
     carnet: {
         type: String,
         required: [true, 'El carnet es obligatorio']
+    },
+    correo: {
+        type: String,
+        required: [true,'El correo es obligatorio'],
+        unique: true
     },
     area: {
         type: String,
@@ -71,5 +76,6 @@ UsuarioSchema.methods.toJSON = function() {
     usuario.uid = _id;
     return usuario;
 }
+
 
 module.exports = model( 'Usuario', UsuarioSchema);
