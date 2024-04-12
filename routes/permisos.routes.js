@@ -1,6 +1,8 @@
 const { Router } = require('express'); 
 const { check } = require('express-validator');
 
+const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
+
 
 const { crearPermiso, 
         obtenerPermisos, 

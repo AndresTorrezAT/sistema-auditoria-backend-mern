@@ -5,6 +5,7 @@ const Producto = require('./producto');
 const Role = require('./role');
 const Server = require('./server');
 const Usuario = require('./usuario');
+const Permiso = require('./permiso');
 
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
     Role,
     Server,
     Usuario,
+    Permiso,
 }

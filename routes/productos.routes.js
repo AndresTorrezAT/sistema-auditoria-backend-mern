@@ -3,13 +3,15 @@ const { check } = require('express-validator');
 
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
 
+const { existeCategoriaPorId, existeProductoPorId } = require('../helpers/db-validators');
+
 const { crearProducto, 
         obtenerProductos, 
         obtenerProducto, 
         actualizarProducto, 
         borrarProducto } = require('../controllers/productos.controller');
 
-const { existeCategoriaPorId, existeProductoPorId } = require('../helpers/db-validators');
+
 
 
 const router = Router();
