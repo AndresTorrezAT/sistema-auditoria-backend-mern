@@ -40,18 +40,16 @@ const obtenerPermisos = async( req, res = response ) => {
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
 
-    const [ total, productos ] = await Promise.all([
-        Producto.countDocuments( query ),
-        Producto.find( query )
-            .populate('usuario', 'nombre')
-            .populate('categoria', 'nombre')
+    const [ total, permisos ] = await Promise.all([
+        Permiso.countDocuments( query ),
+        Permiso.find( query )
             .skip( Number(desde) )
             .limit( Number(limite) )
     ]);
 
     res.json({
         total,
-        productos
+        permisos
     });
 
 }
@@ -59,11 +57,9 @@ const obtenerPermisos = async( req, res = response ) => {
 const obtenerPermiso = async( req, res = response) => {
 
     const { id } = req.params;
-    const producto = await Producto.findById( id )
-                            .populate('usuario', 'nombre')
-                            .populate('categoria', 'nombre');
+    const permiso = await Permiso.findById( id );
 
-    res.json( producto );
+    res.json( permiso );
 
 }
 
